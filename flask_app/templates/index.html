@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <body>
+        <div id="wrapper">
+            <div id="container">
+                <div id="header"></div>
+                <div id="content">
+                    <div class="col">
+                        <h1>Registration</h1>
+                        <fieldset class="form">
+                            <legend>Create a new user</legend>
+                            <form class="form" action="/register/user" method="POST">
+                                <div class="row">
+                                    <label for="first_name">First Name:</label>
+                                    <input type="text" name="first_name">
+                                </div>
+                                <div class="row">
+                                    <label for="last_name">Last Name:</label>
+                                    <input type="text" name="last_name">
+                                </div>
+                                <div class="row">
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email">
+                                </div>
+                                <div class="row">
+                                    <label for="birthday">Birthdate:</label>
+                                    <input type="date" name="birthday">
+                                </div>
+                                <div class="row">
+                                    <label for="abducted">Would you like to be abducted by aliens?</label>
+                                    <label for="abducted">Yes</label>
+                                    <input type="radio" name="abducted" value="1">
+                                    <label for="abducted">No</label>
+                                    <input type="radio" name="abducted" value="0">
+                                </div>
+                                <label class="row" for="planet_id">Which planet would you like to move to?</label>
+                                <select class="row" name="planet_id">
+                                    {% for a_planet in planets%}
+                                    <option value="{{a_planet.id}}">{{a_planet.name}}</option>
+                                    {%endfor%}
+                                </select>
+                                <br>
+                                <div class="row">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password">
+                                </div>
+                                <div class="row">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input type="password" name="confirm_password">
+                                </div>
+                                <input class="row" type="submit" value="Create">
+
+                            </form>
+                        </fieldset>
+                        {% with messages = get_flashed_messages(category_filter=["register"]) %}
+                        <!-- declare a variable called messages -->
+                        {% if messages %} <!-- check if there are any messages -->
+                        {% for message in messages %} <!-- loop through the messages -->
+                        <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="col">
+                        <h1>Login</h1>
+                        <fieldset class="form">
+                            <legend>Login User:</legend>
+                            <form class="form" action="/login" method="POST">
+                                <div class="row">
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email">
+                                </div>
+                                <div class="row">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password">
+                                </div>
+                                <br>
+                                <input class="row" type="submit" value="Login">
+                                {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                                    {% if messages %} <!-- check if there are any messages -->
+                                        {% for message in messages %} <!-- loop through the messages -->
+                                            <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

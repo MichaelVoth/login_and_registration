@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+
+<body>
+    <h1>Welcome {{user.first_name}}!</h1>
+    {% if user.abducted == 1: %}
+        <p>You would like to be abducted!</p>
+    {%endif%}
+    {%if user.abducted == 0: %}
+        <p>You do not want to be abducted.</p>
+    {%endif%}
+        <p>You want to live on {{user.planet_name}}</p>
+    {% if user.birthday.strftime("%m-%d") == now.strftime("%m-%d") %}
+        <p>By the way, Happy Birthday, {{ user.first_name }}!</p>
+    {% endif %}
+    <a href="/logout">Logout</a>
+</body>
+
+</html>
